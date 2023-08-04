@@ -3,6 +3,11 @@
 This repository is a demo of how to setup [NeilFraser/JS-Interpreter](https://github.com/NeilFraser/JS-Interpreter) to
 run in Cloudflare Workers.
 
+Note that this is a minimal effort integration and is not the most ideal way to integrate the two. Namely:
+
+- `Interpreter` and `acorn` is added to the global this object.
+- Depends on [a third party fork](https://github.com/yorinasub17/JS-Interpreter/tree/pkgd) of `JS-Interpreter`.
+
 ## Quickstart
 
 ```
