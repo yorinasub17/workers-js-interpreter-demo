@@ -1,6 +1,10 @@
-import "js-interpreter/interpreter.js";
+import "JS-Interpreter/interpreter.js";
 import * as acorn from "acorn"
 globalThis.acorn = acorn;
+
+declare global {
+  var Interpreter: any
+}
 
 const code = `function getFirstName(input) {
   return input.split(" ").slice(0, -1).join(" ");
@@ -8,7 +12,7 @@ const code = `function getFirstName(input) {
 setOutput(JSON.stringify(getFirstName(JSON.parse(getInput()))));`;
 
 export default {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+	async fetch(request: Request, env: any, ctx: ExecutionContext): Promise<Response> {
     let output;
     const inp = new globalThis.Interpreter(
       code,

@@ -6,13 +6,12 @@ run in Cloudflare Workers.
 Note that this is a minimal effort integration and is not the most ideal way to integrate the two. Namely:
 
 - `Interpreter` and `acorn` is added to the global this object.
-- Depends on [a third party fork](https://github.com/yorinasub17/JS-Interpreter/tree/pkgd) of `JS-Interpreter`.
 
 ## Quickstart
 
 ```
-yarn
-yarn start
+pnpm
+pnpm start
 ```
 
 Hit the endpoint. You should get the response, `Yori`.
@@ -21,33 +20,31 @@ Hit the endpoint. You should get the response, `Yori`.
 
 `JS-Interpreter` doesn't have an official NPM package, and the current third party packages are not up to
 date (see [this issue](https://github.com/NeilFraser/JS-Interpreter/issues/216) on the current state of `JS-Interpreter`
-NPM packages). To handle this, I have created a minimal fork of
-[JS-Interpreter](https://github.com/yorinasub17/JS-Interpreter) that has a minimal `package.json` file that allows
-installing the package over GitHub (on the branch [pkgd](https://github.com/yorinasub17/JS-Interpreter/tree/pkgd)).
-
-This allows installing the package with:
+NPM packages). So instead, we install it through the git integration in NPM/PNPM, e.g:
 
 ```
-yarn add 'js-interpreter@https://github.com/yorinasub17/JS-Interpreter#20230804'
+pnpm add github:NeilFraser/JS-Interpreter
 ```
 
-so that it can be imported in the Cloudflare workers code.
+> This doesn't work for yarn, since it requires a package.json file and the source repo doesn't have one.
+> You can instead use [my minimal fork](https://github.com/yorinasub17/JS-Interpreter/tree/pkgd), which only has a
+> package.json file.
+>
+> E.g., `yarn add 'JS-Interpreter@https://github.com/yorinasub17/JS-Interpreter#20230804'`
 
-Note that this is a minimal fork to make it easier to pull in updates to the upstream changes. This means that it does
-not include the necessary exports to be able to access the `Interpreter` object without `globalThis`.
-
+Note that `JS-Interpreter` is optimized for the browser environment, and thus doesn't export the objects.
 Meaning, you can't do
 
 ```typescript
 // THIS DOESN'T WORK
-import Interpreter from "js-interpreter/acorn_interpreter.js";
+import Interpreter from "JS-Interpreter/acorn_interpreter.js";
 ```
 
 like you would expect. You must do
 
 ```typescript
 // This loads Interpreter into globalThis, making it accessible as "globalThis.Interpreter".
-import "js-interpreter/interpreter.js";
+import "JS-Interpreter/interpreter.js";
 ```
 
 Additionally, the provided `acorn.js` file in `js-interpreter` doesn't automatically load the `acorn` object into
