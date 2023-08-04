@@ -16,7 +16,6 @@ export default {
     let output;
     const inp = new globalThis.Interpreter(
       code,
-      //eslint-disable-next-line @typescript-eslint/no-explicit-any
       (interpreter: any, globalObject: any) => {
         interpreter.setProperty(
           globalObject,
