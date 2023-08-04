@@ -12,7 +12,6 @@
     "wrangler": "^3.0.0"
   },
   "dependencies": {
-    "JS-Interpreter": "github:NeilFraser/JS-Interpreter",
-    "acorn": "^8.10.0"
+    "JS-Interpreter": "github:NeilFraser/JS-Interpreter"
   }
 }

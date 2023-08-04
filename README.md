@@ -10,7 +10,7 @@ Note that this is a minimal effort integration and is not the most ideal way to 
 ## Quickstart
 
 ```
-pnpm
+pnpm install
 pnpm start
 ```
 
@@ -48,13 +48,13 @@ import "JS-Interpreter/interpreter.js";
 ```
 
 Additionally, the provided `acorn.js` file in `js-interpreter` doesn't automatically load the `acorn` object into
-`globalThis` like the browser environment even if you import it. This breaks the `Interpreter` object as it expects
-being able to access acorn from `globalThis.acorn.parse`. To support this, you should install the
-[acorn](https://www.npmjs.com/package/acorn) npm package and bind it manually in the workers runtime:
+`globalThis` like the browser environment, and instead exports the object as modules. This breaks the `Interpreter`
+object as it expects being able to access acorn from `globalThis.acorn.parse`. To support this, you should manually load
+it to the `globalThis` object:
 
 ```typescript
-import "js-interpreter/interpreter.js";
-import * as acorn from "acorn";
+import "JS-Interpreter/interpreter.js";
+import * as acorn from "JS-Interpreter/acorn.js";
 globalThis.acorn = acorn;
 ```
 

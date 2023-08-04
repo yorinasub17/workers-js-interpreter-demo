@@ -1,9 +1,10 @@
 import "JS-Interpreter/interpreter.js";
-import * as acorn from "acorn"
+import * as acorn from "JS-Interpreter/acorn.js"
 globalThis.acorn = acorn;
 
 declare global {
   var Interpreter: any
+  var acorn: any
 }
 
 const code = `function getFirstName(input) {
