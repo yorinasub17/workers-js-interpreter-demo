@@ -27,8 +27,7 @@ pnpm add github:NeilFraser/JS-Interpreter
 ```
 
 > This doesn't work for yarn, since it requires a package.json file and the source repo doesn't have one.
-> You can instead use [my minimal fork](https://github.com/yorinasub17/JS-Interpreter/tree/pkgd), which only has a
-> package.json file.
+> You can instead use [my minimal fork](https://github.com/yorinasub17/JS-Interpreter).
 >
 > E.g., `yarn add 'JS-Interpreter@https://github.com/yorinasub17/JS-Interpreter#20230804'`
 
